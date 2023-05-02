@@ -275,6 +275,7 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 	private int count() 
 	{
 		int c = 0;
+		for (Node<E> p = dummy.next; p != dummy; p = p.next) ++c;
 		return c;
 	}
 	
