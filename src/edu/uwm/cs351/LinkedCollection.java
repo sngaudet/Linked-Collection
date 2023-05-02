@@ -1,4 +1,5 @@
 //Samuel Gaudet, Homework #13, CS 351
+//went to tutoring on 5/2
 
 package edu.uwm.cs351;
 
