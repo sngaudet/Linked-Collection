@@ -272,7 +272,8 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		MIN_QUICKSORT_SIZE = n;
 	}
 	
-	private int count() {
+	private int count() 
+	{
 		int c = 0;
 		return c;
 	}
@@ -285,6 +286,11 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 	private void addNodeAfter(Node<E> p, Node<E> n) {
 		// TODO: Simple: place n in DLL after p.
 		// No null pointers.
+		Node<E> temp = p.next;
+		p.next = n;
+		n.prev = p;
+		n.next = temp;
+		temp.prev = n;
 	}
 	
 	private void insertionsort(Comparator<E> comp) {
