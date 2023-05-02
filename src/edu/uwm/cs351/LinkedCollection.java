@@ -278,9 +278,12 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		return c;
 	}
 	
-	private void removeNode(Node<E> p) {
+	private void removeNode(Node<E> p) 
+	{
 		// TODO: Simple: remove this node from the DLL
 		// by bypassing it.  No need to change this node's links.
+		p.prev.next = p.next;
+		p.next.prev = p.prev;
 	}
 	
 	private void addNodeAfter(Node<E> p, Node<E> n) {
