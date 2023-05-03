@@ -32,22 +32,26 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 	 * @param error string to print to report the exact error found
 	 * @return false always
 	 */
-	private boolean report(String error) {
+	private boolean report(String error) 
+	{
 		reporter.accept(error);
 		return false;
 	}
 
-	private static class Node<T> {
+	private static class Node<T> 
+	{
 		T data;
 		Node<T> next, prev;
 
 		@SuppressWarnings("unchecked")
-		public Node() {
+		public Node() 
+		{
 			next = prev = this;
 			data = (T)this;
 		}
 
-		public Node(T data, Node<T> prev, Node<T> next) {
+		public Node(T data, Node<T> prev, Node<T> next) 
+		{
 			this.data = data;
 			this.prev = prev;
 			this.next = next;
@@ -60,7 +64,8 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 
 	private LinkedCollection(boolean ignored) {} // DO NOT CHANGE THIS
 
-	private boolean wellFormed() {
+	private boolean wellFormed() 
+	{
 		// Invariant:
 		// 1. dummy node is not null.  Its data should be itself, cast (unsafely) data = (T)this;.
 		// 2. each link must be correctly double linked.
@@ -72,7 +77,8 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 
 		int count_elements = 0;
 		Node<E> prev = dummy;
-		for (Node<E> p = dummy.next; p != dummy; p = p.next) {
+		for (Node<E> p = dummy.next; p != dummy; p = p.next) 
+		{
 			if (p == null) return report("found null in list after " + count_elements + " nodes");
 			if (p.data == p) return report("Found dummy node inside of the list");
 			if (p.prev != prev) return report("prev link bad after " + count_elements + " nodes");
@@ -89,14 +95,16 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 	/**
 	 * Create an empty linked collection.
 	 */
-	public LinkedCollection() {
+	public LinkedCollection() 
+	{
 		dummy = new Node<E>();
 		count = version = 0;
 		assert wellFormed() : "invariant failed in constructor";
 	}
 
 	@Override // implementation
-	public boolean add(E x) {
+	public boolean add(E x) 
+	{
 		assert wellFormed() : "invariant broken at start of add()";
 		Node<E> n = new Node<E>(x,dummy.prev,dummy);
 		dummy.prev.next = n;
@@ -108,7 +116,8 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 	}
 
 	@Override // efficiency (optional!)
-	public void clear() {
+	public void clear() 
+	{
 		assert wellFormed() : "invariant broken at start of clear()";
 		if (isEmpty()) return;
 		dummy.next = dummy.prev = dummy;
@@ -118,23 +127,28 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 	}
 
 	@Override // required
-	public int size() {
+	public int size() 
+	{
 		assert wellFormed() : "invariant broken at start of size()";
 		return count;
 	}
 	
 	@Override // implementation (optional)
-	public String toString() {
+	public String toString() 
+	{
 		assert wellFormed() : "invariant broken at start of toString";
 		return "{Collection of size: " + Integer.toString(size()) + "}";
 	}
 
 	@Override // decorate
-	public boolean addAll(Collection<? extends E> c) {
+	public boolean addAll(Collection<? extends E> c) 
+	{
 		assert wellFormed() : "invariant broken at start of addAll";
-		if (c == this && count > 0) {
+		if (c == this && count > 0) 
+		{
 			Node<E> last = dummy.prev;
-			for (Node<E> p = dummy.next; p.prev != last; p = p.next) {
+			for (Node<E> p = dummy.next; p.prev != last; p = p.next) 
+			{
 				add(p.data);
 			}
 			assert wellFormed() : "invariant broken by addAll";
@@ -143,17 +157,20 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 	}
 
 	@Override // required
-	public Iterator<E> iterator() {
+	public Iterator<E> iterator() 
+	{
 		assert wellFormed() : "invariant broken at start of iterator()";
 		return new MyIterator();
 	}
 
-	private class MyIterator implements Iterator<E> {
+	private class MyIterator implements Iterator<E> 
+	{
 		int colVersion = version;
 		boolean isCurrent;
 		Node<E> cursor;
 
-		private boolean wellFormed() {
+		private boolean wellFormed() 
+		{
 			// Invariant for recommended fields:
 
 			// 0. The outer invariant holds, and versions match
@@ -165,13 +182,15 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 
 			// 0.
 			if (!LinkedCollection.this.wellFormed()) return false;
-			if (colVersion == version) {
+			if (colVersion == version) 
+			{
 				// 1. (optional)
 				if (cursor == null) return report("curdor is null");
 
 				// 2.
 				Node<E> p;
-				for (p = dummy; p != dummy.prev && p != cursor; p = p.next) {
+				for (p = dummy; p != dummy.prev && p != cursor; p = p.next) 
+				{
 					// nothing
 				}
 				if (p != cursor) return report("cursor not in list");
@@ -183,31 +202,37 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 			return true;
 		}
 
-		MyIterator() {
+		MyIterator() 
+		{
 			cursor = dummy;
 			isCurrent = false;
 			assert wellFormed() : "invariant fails in iterator constructor";
 		}
 
 
-		private void checkVersion() {
-			if (version != colVersion) {
+		private void checkVersion() 
+		{
+			if (version != colVersion) 
+			{
 				throw new ConcurrentModificationException("iterator stale");
 			}
 		}
 
 		@Override // required
-		public boolean hasNext() {
+		public boolean hasNext() 
+		{
 			assert wellFormed() : "invariant fails at start of hasNext()";
 			checkVersion();
 			return cursor.next != dummy;
 		}
 
 		@Override // required
-		public E next() {
+		public E next() 
+		{
 			assert wellFormed() : "invariant fails at start of next()";
 			checkVersion();
-			if (!hasNext()) {
+			if (!hasNext()) 
+			{
 				throw new NoSuchElementException("no more elements");
 			}
 			cursor = cursor.next;
@@ -217,10 +242,12 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		}
 
 		@Override // required or implementation
-		public void remove() {
+		public void remove() 
+		{
 			assert wellFormed() : "invariant fails at start of remove()";
 			checkVersion();
-			if (!isCurrent) {
+			if (!isCurrent) 
+			{
 				throw new IllegalStateException("cannot remove until next() is called (again)");
 			}
 			cursor.prev.next = cursor.next;
@@ -237,23 +264,28 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 	
 	private static int MIN_QUICKSORT_SIZE = 2; // never smaller than 2
 	
-	public String toDebugString() {
+	public String toDebugString() 
+	{
 		Map<Object, Integer> m = new IdentityHashMap<>();
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
 		Node<E> p = dummy;
 		int i = 0;
-		for (Node<E> n = p.next; n != dummy; n = n.next) {
-			if (n == null) {
+		for (Node<E> n = p.next; n != dummy; n = n.next) 
+		{
+			if (n == null) 
+			{
 				sb.append(" <null>");
 				break;
 			}
-			if (n.prev == p) {
+			if (n.prev == p) 
+			{
 				if (m.size() > 0) sb.append(", ");
 			}
 			else sb.append("! ");
 			Integer j = m.put(n, i);
-			if (j != null) {
+			if (j != null) 
+			{
 				sb.append("Node #" + j);
 				break;
 			}
@@ -268,7 +300,8 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 	 * Set the threshhold below which we use insertion sort.
 	 * @param n number to use, must be greater than 1.
 	 */
-	public static void setMinQuicksortSize(int n) {
+	public static void setMinQuicksortSize(int n) 
+	{
 		if (n < 2) throw new IllegalArgumentException("too small");
 		MIN_QUICKSORT_SIZE = n;
 	}
@@ -288,7 +321,8 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		p.next.prev = p.prev;
 	}
 	
-	private void addNodeAfter(Node<E> p, Node<E> n) {
+	private void addNodeAfter(Node<E> p, Node<E> n) 
+	{
 		// TODO: Simple: place n in DLL after p.
 		// No null pointers.
 		Node<E> temp = p.next;
@@ -298,7 +332,8 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		temp.prev = n;
 	}
 	
-	private void insertionsort(Comparator<E> comp) {
+	private void insertionsort(Comparator<E> comp) 
+	{
 		// Do not assert invariant.
 	}
 	
@@ -306,7 +341,8 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 	 * @param comp
 	 * @return
 	 */
-	private Node<E> partition(Comparator<E> comp) {
+	private Node<E> partition(Comparator<E> comp) 
+	{
 		Node<E> pivot = dummy.next;
 		Node<E> lastPivot = pivot;
 		assert pivot != null;
@@ -318,8 +354,10 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		return lastPivot;
 	}
 	
-	private void quicksort(Comparator<E> comp) {
-		if (count() < MIN_QUICKSORT_SIZE) { // the only "if" permitted
+	private void quicksort(Comparator<E> comp) 
+	{
+		if (count() < MIN_QUICKSORT_SIZE) 
+		{ // the only "if" permitted
 			insertionsort(comp);
 			return;
 		}
@@ -331,7 +369,8 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 	 * The sorting algorithm is "stable".
 	 * @param comp comparator, must not be null
 	 */
-	public void sort(Comparator<E> comp) {
+	public void sort(Comparator<E> comp) 
+	{
 		assert wellFormed() : "invariant failed in sort";
 		if (comp == null) throw new NullPointerException();
 		quicksort(comp);
