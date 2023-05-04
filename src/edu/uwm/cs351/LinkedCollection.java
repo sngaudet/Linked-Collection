@@ -375,11 +375,11 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 			int result = comp.compare(temp.data, pivot.data);
 			if (result < 0)
 			{
-				pivot.prev = temp;
+				lastPivot = pivot.prev = temp;
 			}
 			else
 			{
-				pivot.next = temp;
+				lastPivot = pivot.next = temp;
 			}
 			temp = temp.next;
 		}
