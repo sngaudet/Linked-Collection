@@ -369,7 +369,7 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		// TODO partition all the nodes in the null-terminated list starting at first.
 		// See homework description
 		
-		Node<E> temp = dummy.next;
+		Node<E> temp = dummy.next.next;
 		while (temp != dummy)
 		{
 			int result = comp.compare(temp.data, pivot.data);
@@ -382,6 +382,7 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 				lastPivot = pivot.next = temp;
 			}
 			temp = temp.next;
+//			--count;
 		}
 		
 		return lastPivot;
