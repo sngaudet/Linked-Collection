@@ -337,6 +337,7 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		// Do not assert invariant.
 		for (Node<E> walkForward = dummy.next.next; walkForward != dummy; walkForward = walkForward.next)
 		{
+			Node<E> temp = walkForward.prev;
 			Node<E> walkBack;
 			for (walkBack = walkForward; walkBack.prev != dummy && comp.compare(walkForward.data, walkBack.prev.data) < 0; walkBack = walkBack.prev)
 			{}
@@ -344,8 +345,8 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 			{
 				removeNode(walkForward);
 				addNodeAfter(walkBack.prev, walkForward);
+				walkForward = temp;
 			}
-			System.out.println(this.toDebugString());
 		}
 	}
 	
