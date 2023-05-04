@@ -1,5 +1,8 @@
 //Samuel Gaudet, Homework #13, CS 351
 //went to tutoring on 5/2
+//went to Boyland office hours on 5/4
+//went to tutoring on 5/4
+//discussed insertionsort with Janathul on 5/4
 
 package edu.uwm.cs351;
 
