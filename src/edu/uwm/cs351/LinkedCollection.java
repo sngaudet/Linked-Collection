@@ -335,16 +335,25 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 	private void insertionsort(Comparator<E> comp) 
 	{
 		// Do not assert invariant.
-		for (Node<E> walkForward = dummy.next; walkForward != dummy; walkForward = walkForward.next)
+		for (Node<E> walkForward = dummy.next.next; walkForward != dummy; walkForward = walkForward.next)
 		{
-			for (Node<E> walkBack = walkForward; walkBack != dummy; walkBack = walkBack.prev)
+			Node<E> walkBack;
+			for (walkBack = walkForward;walkBack.prev != dummy && comp.compare(walkForward.data, walkBack.prev.data) > 0; walkBack = walkBack.prev)
+			{}
+			if (walkBack != walkForward) 
 			{
-				if (comp.compare((Object)walkBack, (Object)walkBack.prev))
-				{
-					
-				}
+				addNodeAfter(walkBack.prev, walkForward);
+				removeNode(walkForward);
 			}
 		}
+		
+//		for (Node<E> walkForward = dummy.next.next; walkForward != dummy; walkForward = walkForward.next)
+//		{
+//			while (walkForward.prev != dummy)
+//			{
+//				Node<E> walkBack = walkForward.prev;
+//			}
+//		}
 	}
 	
 	/**
