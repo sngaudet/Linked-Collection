@@ -338,7 +338,7 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		for (Node<E> walkForward = dummy.next.next; walkForward != dummy; walkForward = walkForward.next)
 		{
 			Node<E> walkBack;
-			for (walkBack = walkForward;walkBack.prev != dummy && comp.compare(walkForward.data, walkBack.prev.data) > 0; walkBack = walkBack.prev)
+			for (walkBack = walkForward; walkBack.prev != dummy && comp.compare(walkForward.data, walkBack.prev.data) < 0; walkBack = walkBack.prev)
 			{}
 			if (walkBack != walkForward) 
 			{
