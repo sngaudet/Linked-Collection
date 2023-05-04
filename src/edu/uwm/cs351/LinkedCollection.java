@@ -342,18 +342,11 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 			{}
 			if (walkBack != walkForward) 
 			{
-				addNodeAfter(walkBack.prev, walkForward);
 				removeNode(walkForward);
+				addNodeAfter(walkBack.prev, walkForward);
 			}
+			System.out.println(this.toDebugString());
 		}
-		
-//		for (Node<E> walkForward = dummy.next.next; walkForward != dummy; walkForward = walkForward.next)
-//		{
-//			while (walkForward.prev != dummy)
-//			{
-//				Node<E> walkBack = walkForward.prev;
-//			}
-//		}
 	}
 	
 	/**
