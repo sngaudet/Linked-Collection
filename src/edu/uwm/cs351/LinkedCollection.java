@@ -364,6 +364,22 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		// Do not assert invariant.
 		// TODO partition all the nodes in the null-terminated list starting at first.
 		// See homework description
+		
+		Node<E> temp = dummy.next;
+		while (temp != dummy)
+		{
+			int result = comp.compare(temp.data, pivot.data);
+			if (result < 0)
+			{
+				pivot.prev = temp;
+			}
+			else
+			{
+				pivot.next = temp;
+			}
+			temp = temp.next;
+		}
+		
 		return lastPivot;
 	}
 	
