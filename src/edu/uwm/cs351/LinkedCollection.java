@@ -370,23 +370,31 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		// Do not assert invariant.
 		// TODO partition all the nodes in the null-terminated list starting at first.
 		// See homework description
-		removeNode(pivot);
-		pivot.next = null;
-		pivot.prev = null;
 		
-		Node<E> temp = dummy.next.next;
-		while (temp != dummy)
+		Node<E> n = pivot.next;
+		
+		while (n != dummy)
 		{
-			int result = comp.compare(temp.data, lastPivot.data);
+			int result = comp.compare(n.data, pivot.data);
 			if (result < 0)
 			{
-				lastPivot = pivot.prev = temp;
+				removeNode(n);
+				addNodeAfter(pivot.prev, n);
+				n = n.next;
+			}
+			else if (result > 0)
+			{
+				removeNode(n);
+				addNodeAfter(lastPivot, n);
+				n = n.next.next;
 			}
 			else
 			{
-				lastPivot = pivot.next = temp;
+				removeNode(n);
+				addNodeAfter(lastPivot, n);
+				lastPivot = n;
+				n = n.next.next;
 			}
-			temp = temp.next;
 		}
 		
 		return lastPivot;
