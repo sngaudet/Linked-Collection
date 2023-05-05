@@ -408,12 +408,16 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		// TODO: Two recursive calls.  No loops.  No conditions at all.
 		Node<E> equalAndLesser = partition(comp);
 		Node<E> greater = equalAndLesser.next;
+		Node<E> tail = dummy.prev;
 		
 		equalAndLesser.next = dummy;
 		dummy.prev = equalAndLesser;
+		count = count();
 		quicksort(comp);
 		
 		dummy.next = greater;
+		dummy.prev = tail;
+		count = count();
 		quicksort(comp);
 		
 	}
