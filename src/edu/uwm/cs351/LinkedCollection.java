@@ -406,7 +406,16 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 			return;
 		}
 		// TODO: Two recursive calls.  No loops.  No conditions at all.
-		Node<E> pivotIndex = partition(comp);
+		Node<E> equalAndLesser = partition(comp);
+		Node<E> greater = equalAndLesser.next;
+		
+		equalAndLesser.next = dummy;
+		dummy.prev = equalAndLesser;
+		quicksort(comp);
+		
+		dummy.next = greater;
+		quicksort(comp);
+		
 	}
 	
 	/**
