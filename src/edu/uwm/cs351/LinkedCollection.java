@@ -393,7 +393,7 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 				removeNode(n);
 				addNodeAfter(lastPivot, n);
 				lastPivot = n;
-				n = n.next.next;
+				n = n.next;
 			}
 		}
 		
