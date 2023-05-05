@@ -4,6 +4,8 @@
 //went to tutoring on 5/4
 //discussed insertionsort with Janathul on 5/4
 //discussed count with Mustafa Khan on 5/4
+//went to tutoring on 5/5
+//talked with Alex Plyer about partition on 5/5
 
 package edu.uwm.cs351;
 
