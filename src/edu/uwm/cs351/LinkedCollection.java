@@ -380,7 +380,7 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 			{
 				removeNode(n);
 				addNodeAfter(pivot.prev, n);
-				n = n.next;
+				n = lastPivot.next;
 			}
 			else if (result > 0)
 			{
@@ -388,6 +388,8 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 			}
 			else
 			{
+				removeNode(n);
+				addNodeAfter(lastPivot, n);
 				lastPivot = n;
 				n = n.next;
 			}
