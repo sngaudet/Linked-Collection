@@ -406,6 +406,7 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 			return;
 		}
 		// TODO: Two recursive calls.  No loops.  No conditions at all.
+		Node<E> pivotIndex = partition(comp);
 	}
 	
 	/**
