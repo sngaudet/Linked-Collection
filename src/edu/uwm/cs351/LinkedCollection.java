@@ -384,14 +384,10 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 			}
 			else if (result > 0)
 			{
-				removeNode(n);
-				addNodeAfter(lastPivot, n);
-				n = n.next.next;
+				n = n.next;
 			}
 			else
 			{
-				removeNode(n);
-				addNodeAfter(lastPivot, n);
 				lastPivot = n;
 				n = n.next;
 			}
