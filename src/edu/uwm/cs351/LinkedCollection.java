@@ -7,6 +7,7 @@
 //went to tutoring on 5/5
 //talked with Alex Plyer about partition on 5/5
 //talked with Mustafa Khan and Zuhaib Khan about insertionsort on 5/5
+//talked with Alex Plyer about quicksort on 5/6
 
 package edu.uwm.cs351;
 
