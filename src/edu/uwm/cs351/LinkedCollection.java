@@ -360,7 +360,7 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 	
 	/**
 	 * @param comp
-	 * @return
+	 * @return lastPivot - the last element that was equal to the pivot
 	 */
 	private Node<E> partition(Comparator<E> comp) 
 	{
