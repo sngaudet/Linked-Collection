@@ -374,6 +374,7 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		// See homework description
 		
 		Node<E> n = pivot.next;
+		Node<E> lastGreater = null;
 		
 		while (n != dummy)
 		{
@@ -382,10 +383,12 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 			{
 				removeNode(n);
 				addNodeAfter(pivot.prev, n);
-				n = lastPivot.next;
+				if (lastGreater == null) n = lastPivot.next;
+				else n = lastGreater.next;
 			}
 			else if (result > 0)
 			{
+				lastGreater = n;
 				n = n.next;
 			}
 			else
