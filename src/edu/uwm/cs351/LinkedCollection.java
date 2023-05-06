@@ -412,15 +412,24 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		Node<E> tail = dummy.prev;
 		Node<E> head = dummy.next;
 		
-		pivot.prev.next = dummy;
-		dummy.prev = pivot.prev;
-		count = count();
-		quicksort(comp);
+		if (pivot.prev != dummy)
+		{
+			pivot.prev.next = dummy;
+			dummy.prev = pivot.prev;
+			count = count();
+			quicksort(comp);
+			dummy.prev.next = pivot;
+		}
 		
-		dummy.next = lastPivot.next;
-		dummy.prev = tail;
-		count = count();
-		quicksort(comp);
+		if (lastPivot.next != dummy)
+		{
+			dummy.next = lastPivot.next;
+			dummy.prev = tail;
+			count = count();
+			quicksort(comp);
+			dummy.next = head;
+			dummy.prev = tail;
+		}
 		
 		dummy.next = head;
 		dummy.prev = tail;
