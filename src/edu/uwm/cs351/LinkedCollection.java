@@ -407,10 +407,10 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 			return;
 		}
 		// TODO: Two recursive calls.  No loops.  No conditions at all.
-		Node<E> tail = dummy.prev;
-		Node<E> head = dummy.next;
 		Node<E> pivot = dummy.next;
 		Node<E> lastPivot = partition(comp);
+		Node<E> tail = dummy.prev;
+		Node<E> head = dummy.next;
 		
 		pivot.prev.next = dummy;
 		dummy.prev = pivot.prev;
