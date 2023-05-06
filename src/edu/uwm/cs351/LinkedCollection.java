@@ -6,6 +6,7 @@
 //discussed count with Mustafa Khan on 5/4
 //went to tutoring on 5/5
 //talked with Alex Plyer about partition on 5/5
+//talked with Mustafa Khan and Zuhaib Khan about insertionsort on 5/5
 
 package edu.uwm.cs351;
 
@@ -407,6 +408,8 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		}
 		// TODO: Two recursive calls.  No loops.  No conditions at all.
 		Node<E> equalAndLesser = partition(comp);
+		
+		
 		Node<E> greater = equalAndLesser.next;
 		Node<E> tail = dummy.prev;
 		
