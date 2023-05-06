@@ -420,10 +420,10 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		Node<E> head = dummy.next;
 		
 		dummy.next = lastPivot.next;
-		lastPivot.next.prev = dummy;
+		dummy.next.prev = dummy;
 		quicksort(comp);
+		lastPivot.next = dummy.next;
 		dummy.next.prev = lastPivot;
-		lastPivot = dummy.next;
 		dummy.next = head;
 	}
 	
