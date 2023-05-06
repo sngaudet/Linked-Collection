@@ -415,13 +415,14 @@ public class LinkedCollection<E> extends AbstractCollection<E>
 		pivot.prev.next = dummy;
 		dummy.prev = pivot.prev;
 		quicksort(comp);
+		dummy.prev.next = pivot;
 		dummy.prev = tail;
 		
-			dummy.next = lastPivot.next;
-			dummy.prev = tail;
-			quicksort(comp);
-			dummy.next = head;
-			dummy.prev = tail;
+		dummy.next = lastPivot.next;
+		dummy.prev = tail;
+		quicksort(comp);
+		dummy.next = head;
+		dummy.prev = tail;
 		
 		dummy.next = head;
 		dummy.prev = tail;
