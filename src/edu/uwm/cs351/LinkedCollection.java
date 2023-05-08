@@ -9,7 +9,8 @@
 //talked with Mustafa Khan and Zuhaib Khan about insertionsort on 5/5
 //talked with Alex Plyer about quicksort on 5/6
 //talked with Lakshmi Surabhi about insertionsort and partition on 5/6
-//talked with Lakshmi Surabhi about partition on 5/6
+//talked with Lakshmi Surabhi about partition and quicksort on 5/7
+//talked with Lakshmi Surabhi about quicksort on 5/8
 
 package edu.uwm.cs351;
 
